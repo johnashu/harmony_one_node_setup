@@ -4,15 +4,16 @@ key_dir="./.hmy/blskeys"
 data_dir="./"
 max_keys=10
 network="mainnet"
-working_dir="/home/maffaz"
-user="maffaz"
+working_dir="/root"
+user="root"
+version="1.0.4"
 
 # Node Binary
 curl -LO https://harmony.one/binary && mv binary harmony && chmod +x harmony
 ./harmony dumpconfig harmony.conf
 
-cat <<-EOF >harmony.conf
-Version = "1.0.4"
+cat <<-EOF > harmony.conf
+Version = "${version}"
 
 [BLSKeys]
   KMSConfigFile = ""
@@ -111,6 +112,7 @@ LimitNPROC=65536
 
 [Install]
 WantedBy=multi-user.target
+
 EOF
 
 sudo chmod 755 /etc/systemd/system/harmony.service
